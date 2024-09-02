@@ -1,0 +1,23 @@
+# 使用官方 Python 基础镜像
+# FROM python:3.8-slim
+FROM 192.168.50.32/base-images/anolisos:8.8
+
+RUN yum update -y && \
+    yum install -y python38 python38-pip wget curl && \
+    pip3 install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple && \
+    pip3 install  python-minifier==2.9.0
+# 设置工作目录
+WORKDIR /app
+
+COPY requirements.txt .
+COPY check_http_health.sh .
+# COPY . /app
+RUN pip install --no-cache-dir -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
+RUN mkdir -p /home/app/logs/tee-sql-service /data/tee_encrypted_data && \
+    touch /home/app/logs/tee-sql-service/app.log && \
+    mkdir -p /check_health && \
+    cp /app/check_http_health.sh /check_health
+    
+# 运行应用程序
+# CMD ["python3", "./server.py"]
+CMD ["tail", "-f", "/dev/null"]

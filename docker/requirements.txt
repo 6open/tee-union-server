@@ -1,0 +1,10 @@
+flask
+polars
+sqlalchemy
+requests
+ujson
+aiohttp
+pyarrow
+mlflow
+boto3
+

@@ -1,0 +1,7 @@
+__pycache__
+data/*
+intersected_data/
+mlruns
+test
+app.log
+src/task/data

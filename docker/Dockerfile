@@ -1,0 +1,20 @@
+FROM tee-sql-service-base:1.0.0
+
+WORKDIR /app
+
+COPY ../*.py /app
+RUN ln -s /home/app/logs/tee-sql-service/app.log /app/app.log
+
+# RUN pyminify /app --in-place --no-remove-annotations \
+#     && python3 -m compileall -b /app \
+#     && find ./ -type d \( -path ./data -o -path ./test \) -prune -o -name "*.py" -print | xargs rm
+
+
+# 运行应用程序
+CMD ["python3", "./server.py"]
+# CMD ["python3", "./server.pyc"]
+# CMD ["python3", "./predeal.pyc"]
+# CMD ["python3", "./predeal.py"]
+# CMD ["tail", "-f", "/dev/null"]
+
+# ENTRYPOINT ["/app/docker-entrypoint.sh"]

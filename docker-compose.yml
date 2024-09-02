@@ -1,0 +1,22 @@
+version: '3.0'
+services:
+  mcsp_service:
+    container_name: tee-sql #tee-sql-service
+    # image: 192.168.50.32/mpc-dev/tee-sql-service-biaopin:1.0.0
+    # image: 192.168.50.32/mpc-dev/pre-deal:1.0.0
+    # image: 192.168.50.32/mpc-dev/tee-sql-service-bp:1.0.0
+    image: 192.168.50.32/common/pre-deal-bp:1.0.0
+    # image: 192.168.50.32/common/pre-deal-1k:1.0.0
+    # image: 192.168.50.32/mpc-dev/tee-sql-service-1k:1.0.0
+
+    ports:
+      - "6700:6700"
+    volumes:
+      - "/data/storage/:/data/storage/"
+      - "/home/app/logs/tee-sql-service:/home/app/logs/tee-sql-service" 
+      # - "./:/app/src"
+    environment:
+      # export MLFLOW_TRACKING_URI=http://192.168.50.10:8999
+      MLFLOW_TRACKING_URI: http://192.168.50.10:8999
+    # command: tail -f /dev/null
+    # command: /bin/bash -c "cd /app && python3 server.py"

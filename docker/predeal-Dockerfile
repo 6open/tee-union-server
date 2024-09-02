@@ -1,0 +1,18 @@
+FROM tee-sql-service-base:1.0.0
+
+WORKDIR /app
+
+COPY ../src/predeal/*.py /app
+RUN ln -s /home/app/logs/tee-sql-service/app.log /app/app.log
+
+# RUN pyminify /app --in-place --no-remove-annotations \
+#     && python3 -m compileall -b /app \
+#     && find ./ -type d \( -path ./data -o -path ./test \) -prune -o -name "*.py" -print | xargs rm
+
+
+# 运行应用程序
+# CMD ["python3", "./predeal-1k.py"]
+CMD ["python3", "./predeal-bp.py"]
+# CMD ["python3", "./predeal-bp.pyc"]
+# CMD ["tail", "-f", "/dev/null"]
+
